@@ -24,4 +24,5 @@ class UserOrderTestCase(TestCase):
 
     def test_user_order_list_unauthenticated(self):
         response = self.client.get(reverse('user-orders'))
+        #deve ser add para evitar o erro de prioridade de autentificação
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)

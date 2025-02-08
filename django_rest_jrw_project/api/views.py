@@ -19,6 +19,7 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
     def get_permissions(self):
         self.permission_classes = [AllowAny]
         if self.request.method == 'POST':
+            #exige autorizaçãso de admin pelo token jwt
             self.permission_classes = [IsAdminUser]
         return super().get_permissions()
 
@@ -37,6 +38,7 @@ class OrderListAPIView(generics.ListAPIView):
 class UserOrderListAPIView(generics.ListAPIView):
     queryset = Order.objects.prefetch_related('items__product')
     serializer_class = OrderSerializer
+    #exige autorizaçãso do token jwt
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
